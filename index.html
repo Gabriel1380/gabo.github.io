@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flor Amarilla Animada</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f8ff;
+            font-family: Arial, sans-serif;
+        }
+        .flower-container {
+            position: relative;
+            width: 300px;
+            height: 350px; /* Aumentado para dar más espacio al mensaje */
+        }
+        .flower {
+            position: absolute;
+            bottom: 0;
+            width: 300px;
+            height: 300px;
+        }
+        .center {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-color: orange;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .petal {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-color: gold;
+            border-radius: 50% 0;
+            top: 50%;
+            left: 50%;
+            transform-origin: 0 0;
+        }
+        .stem {
+            position: absolute;
+            width: 10px;
+            height: 150px;
+            background-color: green;
+            top: 75%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .leaf {
+            position: absolute;
+            width: 50px;
+            height: 30px;
+            background-color: green;
+            border-radius: 50% 50% 0 50%;
+            top: 80%;
+        }
+        .leaf:nth-child(odd) {
+            left: calc(50% - 50px);
+            transform: scaleX(-1);
+        }
+        .leaf:nth-child(even) {
+            right: calc(50% - 50px);
+        }
+        .message {
+            position: absolute;
+            width: 100%;
+            text-align: center;
+            top: 0; /* Cambiado a 0 para colocar el mensaje en la parte superior */
+            color: purple;
+            font-size: 18px;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px white;
+            background-color: rgba(255, 255, 255, 0.7); /* Fondo semi-transparente para mejor legibilidad */
+            padding: 10px 0; /* Añadido padding para más espacio alrededor del texto */
+        }
+    </style>
+</head>
+<body>
+    <div class="flower-container">
+        <div class="message">Gracias por tu amistad</div>
+        <div class="flower">
+            <div class="center"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="stem"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+        </div>
+    </div>
+
+    <script>
+        const petals = document.querySelectorAll('.petal');
+        let angle = 0;
+
+        function animatePetals() {
+            angle += 0.05;
+            petals.forEach((petal, index) => {
+                const rotationAngle = (index * 72) + Math.sin(angle + index) * 5;
+                petal.style.transform = `rotate(${rotationAngle}deg) translate(75px) rotate(45deg)`;
+            });
+            requestAnimationFrame(animatePetals);
+        }
+
+        animatePetals();
+    </script>
+</body>
+</html>
